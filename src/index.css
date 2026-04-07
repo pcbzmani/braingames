@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+  }
+  body {
+    @apply bg-brand-bg text-white font-body overflow-x-hidden;
+    min-height: 100dvh;
+  }
+  #root {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-purple via-brand-violet to-brand-cyan bg-clip-text text-transparent;
+  }
+  .card-glass {
+    @apply bg-brand-card border border-white/10 rounded-2xl;
+    backdrop-filter: blur(12px);
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-brand-purple to-brand-violet text-white font-semibold rounded-xl px-6 py-3
+           active:scale-95 transition-all duration-150 shadow-lg shadow-brand-purple/30
+           hover:shadow-brand-violet/50 hover:shadow-xl;
+  }
+  .btn-ghost {
+    @apply border border-white/20 text-white/80 rounded-xl px-6 py-3
+           active:scale-95 transition-all duration-150 hover:bg-white/5;
+  }
+  .star-filled {
+    color: #FFD700;
+    filter: drop-shadow(0 0 4px #FFD700);
+  }
+  .star-empty {
+    color: #ffffff22;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #6C3CE155; border-radius: 2px; }
