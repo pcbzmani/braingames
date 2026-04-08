@@ -3,6 +3,7 @@ import type { MathConfig } from '@/levels/types'
 import { generateQuestions } from './engine'
 import { useTimer } from '@/hooks/useTimer'
 import { TimerBar } from '@/components/TimerBar'
+import { playCorrect, playWrong } from '@/utils/sounds'
 
 interface Props {
   config: MathConfig
@@ -25,7 +26,7 @@ export function MathGame({ config, onComplete }: Props) {
     if (answered !== null) return
     setAnswered(choice)
     const isCorrect = choice === questions[current].answer
-    if (isCorrect) setScore(s => s + 1)
+    if (isCorrect) { playCorrect(); setScore(s => s + 1) } else { playWrong() }
 
     setTimeout(() => {
       if (current + 1 >= questions.length) {

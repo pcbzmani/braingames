@@ -62,6 +62,7 @@ export function GameScreen({ config, onFinish, onBack, onNext, isLastLevel }: Pr
         <GameResult
           stars={result.stars}
           levelId={config.id}
+          timeMs={result.timeMs}
           onNext={onNext}
           onRetry={retry}
           onHome={onBack}

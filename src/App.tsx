@@ -69,6 +69,7 @@ export default function App() {
         )}
         {screen === 'game' && (
           <GameScreen
+            key={currentLevelId}
             config={config}
             onFinish={handleFinish}
             onBack={() => setScreen('map')}

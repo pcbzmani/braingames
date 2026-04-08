@@ -3,6 +3,7 @@ import type { WordScrambleConfig } from '@/levels/types'
 import { generateScrambles } from './engine'
 import { useTimer } from '@/hooks/useTimer'
 import { TimerBar } from '@/components/TimerBar'
+import { playCorrect, playWrong } from '@/utils/sounds'
 
 interface Props {
   config: WordScrambleConfig
@@ -26,7 +27,7 @@ export function WordScrambleGame({ config, onComplete }: Props) {
   function submit() {
     const isCorrect = input.trim().toLowerCase() === words[current].original.toLowerCase()
     setFeedback(isCorrect ? 'correct' : 'wrong')
-    if (isCorrect) setScore(s => s + 1)
+    if (isCorrect) { playCorrect(); setScore(s => s + 1) } else { playWrong() }
     setTimeout(() => {
       setFeedback(null)
       setInput('')

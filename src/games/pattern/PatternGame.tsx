@@ -3,6 +3,7 @@ import type { PatternConfig } from '@/levels/types'
 import { generatePattern, COLOR_CLASS, type PatternCell } from './engine'
 import { useTimer } from '@/hooks/useTimer'
 import { TimerBar } from '@/components/TimerBar'
+import { playCorrect, playWrong } from '@/utils/sounds'
 
 interface Props {
   config: PatternConfig
@@ -32,6 +33,7 @@ export function PatternGame({ config, onComplete }: Props) {
     if (picked !== null) return
     setPicked(idx)
     const isCorrect = idx === puzzle.correctIndex
+    if (isCorrect) playCorrect(); else playWrong()
     const stars = !isCorrect ? 0 : elapsed <= config.starThresholds[1] ? 3 : elapsed <= config.starThresholds[0] ? 2 : 1
     setTimeout(() => { stop(); onComplete(stars, elapsed * 1000) }, 800)
   }

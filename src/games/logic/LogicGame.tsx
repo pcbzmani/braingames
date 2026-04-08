@@ -3,6 +3,7 @@ import type { LogicConfig } from '@/levels/types'
 import { generateLogicPuzzle } from './engine'
 import { useTimer } from '@/hooks/useTimer'
 import { TimerBar } from '@/components/TimerBar'
+import { playCorrect, playWrong } from '@/utils/sounds'
 
 interface Props {
   config: LogicConfig
@@ -22,9 +23,9 @@ export function LogicGame({ config, onComplete }: Props) {
   function pick(item: string) {
     if (picked !== null) return
     setPicked(item)
-    // Find who the question is about
     const questionName = puzzle.question.match(/does (\w+) have/)?.[1] ?? ''
     const isCorrect = puzzle.solution[questionName] === item
+    if (isCorrect) playCorrect(); else playWrong()
     const stars = !isCorrect ? 0 : elapsed <= config.starThresholds[1] ? 3 : elapsed <= config.starThresholds[0] ? 2 : 1
     setTimeout(() => { stop(); onComplete(stars, elapsed * 1000) }, 900)
   }

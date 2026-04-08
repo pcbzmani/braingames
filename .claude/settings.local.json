@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -v https://pcbzbraingames.netlify.app/)",
+      "Bash(curl -I https://pcbzbraingames.netlify.app/manifest.webmanifest)",
+      "Bash(curl -I https://pcbzbraingames.netlify.app/registerSW.js)",
+      "Bash(curl -s https://pcbzbraingames.netlify.app/manifest.webmanifest)",
+      "Bash(curl -I https://pcbzbraingames.netlify.app/assets/index-F210Zr39.js)",
+      "Bash(curl -I https://pcbzbraingames.netlify.app/assets/index-ChHvypDI.css)",
+      "Bash(curl -s https://pcbzbraingames.netlify.app/registerSW.js)",
+      "Bash(curl -I https://pcbzbraingames.netlify.app/sw.js)",
+      "Bash(curl -I https://pcbzbraingames.netlify.app/favicon.svg)",
+      "Bash(curl -I https://pcbzbraingames.netlify.app/icons/icon-192.png)"
+    ]
+  }
+}

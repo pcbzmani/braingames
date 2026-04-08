@@ -3,6 +3,7 @@ import type { SequenceConfig } from '@/levels/types'
 import { generateSequence, getPatternLabel } from './engine'
 import { useTimer } from '@/hooks/useTimer'
 import { TimerBar } from '@/components/TimerBar'
+import { playCorrect, playWrong } from '@/utils/sounds'
 
 interface Props {
   config: SequenceConfig
@@ -30,6 +31,7 @@ export function SequenceGame({ config, onComplete }: Props) {
     setCorrect(results)
     setChecked(true)
     const allCorrect = results.every(Boolean)
+    if (allCorrect) playCorrect(); else playWrong()
     const stars = !allCorrect ? 0 : elapsed <= config.starThresholds[1] ? 3 : elapsed <= config.starThresholds[0] ? 2 : 1
     setTimeout(() => onComplete(stars, elapsed * 1000), 1200)
   }

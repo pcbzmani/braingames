@@ -3,6 +3,7 @@ import type { MemoryConfig } from '@/levels/types'
 import { createBoard, isComplete, type MemCard } from './engine'
 import { TimerBar } from '@/components/TimerBar'
 import { useTimer } from '@/hooks/useTimer'
+import { playFlip, playMatch, playWrong } from '@/utils/sounds'
 
 interface Props {
   config: MemoryConfig
@@ -41,6 +42,7 @@ export function MemoryGame({ config, onComplete }: Props) {
 
   const handleFlip = useCallback((idx: number) => {
     if (locked || showAll || cards[idx].matched || cards[idx].flipped) return
+    playFlip()
     const newFlipped = [...flipped, idx]
     const newCards = cards.map((c, i) => i === idx ? { ...c, flipped: true } : c)
     setCards(newCards)
@@ -50,6 +52,7 @@ export function MemoryGame({ config, onComplete }: Props) {
       setMoves(m => m + 1)
       const [a, b] = newFlipped
       if (newCards[a].pairId === newCards[b].pairId) {
+        playMatch()
         const matched = newCards.map((c, i) =>
           i === a || i === b ? { ...c, matched: true } : c
         )
@@ -62,6 +65,7 @@ export function MemoryGame({ config, onComplete }: Props) {
           onComplete(stars, elapsed * 1000)
         }
       } else {
+        setTimeout(() => playWrong(), 400)
         setTimeout(() => {
           setCards(prev => prev.map((c, i) => i === a || i === b ? { ...c, flipped: false } : c))
           setFlipped([])
