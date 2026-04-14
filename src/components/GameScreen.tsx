@@ -35,6 +35,12 @@ export function GameScreen({ config, onFinish, onBack, onNext, isLastLevel }: Pr
     setKey(k => k + 1)
   }
 
+  function handleNext() {
+    setResult(null)
+    setKey(k => k + 1)
+    onNext()
+  }
+
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
@@ -63,7 +69,7 @@ export function GameScreen({ config, onFinish, onBack, onNext, isLastLevel }: Pr
           stars={result.stars}
           levelId={config.id}
           timeMs={result.timeMs}
-          onNext={onNext}
+          onNext={handleNext}
           onRetry={retry}
           onHome={onBack}
           isLastLevel={isLastLevel}
